@@ -35,11 +35,14 @@
 }
 
 
+//Incrementing a NSDate by a given amount of days
 +(NSDate *)incrementDay:(NSDate *)day by:(NSUInteger)daysToAdd
 {
     return [day dateByAddingTimeInterval:60*60*24*daysToAdd];
 }
 
+
+//Getting the start of a day
 +(NSDate *)startOfDay:(NSDate *)day
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -50,12 +53,17 @@
     return [calendar dateFromComponents:components];
 }
 
+
+//Get yesterday's date
 +(NSDate *)yesterday
 {
     NSDate *startOfDay = [self startOfDay:[NSDate date]];
     return [startOfDay dateByAddingTimeInterval:-(60.0f*60.0f*24.0f)];
 }
 
+
+
+//Getting a formatted string with the time from an NSDate e.g. 06:42 PM
 +(NSString *)timeFormattedString:(NSDate *)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -63,6 +71,9 @@
     return [dateFormatter stringFromDate:date];
 }
 
+
+//Getting a formatted string with the time from a start
+//NSDate and an end NSDate e.g. 06:42PM - 07:00PM
 +(NSString *)timeFormattedStringForStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate
 {
     NSString *startTime = [NSDate timeFormattedString:startDate];
@@ -76,6 +87,8 @@
     
 }
 
+
+//Getting a formatted string with the date from an NSDate e.g. Tue, 09/06/14
 +(NSString *)dateFormattedString:(NSDate *)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -83,6 +96,8 @@
     return [dateFormatter stringFromDate:date];
 }
 
+
+//Getting a formatted string with the date from an NSDate e.g. Tue, 09/06/14
 +(NSString *)dateFormattedStringForStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate
 {
     NSString *startTime = [NSDate dateFormattedString:startDate];
@@ -91,6 +106,10 @@
     return [composite stringByAppendingString:endTime];
 }
 
+
+
+//Getting a formatted string with the date and time from
+//an NSDate e.g. Tue, 09/06/14 at 06:42PM
 +(NSString *)dateTimeFormattedString:(NSDate *)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -99,6 +118,11 @@
 }
 
 
+
+
+//Getting a formatted string with the start date and time and the end 
+//date and time from NSDates
+//e.g. Tue, 09/06/14 at 06:42PM to Wed, 09/07/14 at 07:00AM
 +(NSString *)dateTimeFormattedStringForStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate
 {
     NSString *start = [NSDate dateTimeFormattedString:startDate];
@@ -107,6 +131,11 @@
     return [start stringByAppendingString:end];
 }
 
+
+
+//Getting a string that from an NSDate that can be parsed into a 
+//javascription Date object 
+//(useful for dealing with REST APIs such as facebook)
 +(NSString *)javascriptDateObjectFormat:(NSDate *)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -115,21 +144,10 @@
 }
 
 
-//+++TODO implement this for more options when dealing with
-//dates on the backend
-+(NSDictionary *)JSONDateFormat:(NSDate *)date
-{
-    return nil;
-}
-
-+(NSDate *)dateFrom:(NSInteger)numberOfDays daysAfter:(NSDate *)date {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-    [offsetComponents setDay:numberOfDays];
-    return [gregorian dateByAddingComponents:offsetComponents toDate:date options:0];
-}
 
 
+//Getting a NSDate by parsing a datetime string returned by the 
+//facebook Graph API
 +(NSDate *)dateFromFacebookDateTime:(NSString *)datetime
 {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -139,6 +157,8 @@
 }
 
 
+//Getting a NSDate by parsing the datetime (where there is only a date and 
+//no time) from the facebook Graph API
 +(NSDate *)dateFromFacebookDate:(NSString *)datetime
 {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];

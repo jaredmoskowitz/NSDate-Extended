@@ -42,7 +42,7 @@ METHODS INCLUDED:
     //e.g. Tue, 09/06/14 at 06:42PM to Wed, 09/07/14 at 07:00AM
     +(NSString *)dateTimeFormattedStringForStartDate:(NSDate *)startTime EndDate:(NSDate *)endDate;
 
-    -Getting a string that from an NSDate that can be parsed into a 
+    //Getting a string that from an NSDate that can be parsed into a 
     //javascription Date object 
     //(useful for dealing with REST APIs such as facebook)
     +(NSString *)javascriptDateObjectFormat:(NSDate *)date;
